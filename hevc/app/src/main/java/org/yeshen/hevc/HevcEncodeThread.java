@@ -18,13 +18,13 @@ import java.util.concurrent.ArrayBlockingQueue;
  * Copyright (c) 2019 Yeshen.org, Inc. - All Rights Reserved
  *********************************************************************/
 
-class AvcEncodeThread extends Thread {
+class HevcEncodeThread extends Thread {
 
     public interface OnCodeFrame {
         void onCodeFrame(byte[] data);
     }
 
-    private static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/h264.mp4";
+    private static String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Download/h265.mp4";
 
     private volatile boolean isRunning = false;
     private MediaCodec mediaCodec;
@@ -34,14 +34,14 @@ class AvcEncodeThread extends Thread {
     private OnCodeFrame delegate = null;
 
 
-    AvcEncodeThread() {
-        MediaFormat mediaFormat = MediaFormat.createVideoFormat("video/avc", MainActivity.WIDTH, MainActivity.HEIGHT);
+    HevcEncodeThread() {
+        MediaFormat mediaFormat = MediaFormat.createVideoFormat("video/hevc", MainActivity.WIDTH, MainActivity.HEIGHT);
         mediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar);
         mediaFormat.setInteger(MediaFormat.KEY_BIT_RATE, MainActivity.WIDTH * MainActivity.HEIGHT * 5);
         mediaFormat.setInteger(MediaFormat.KEY_FRAME_RATE, MainActivity.FRAME_RATE);
         mediaFormat.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1);
         try {
-            mediaCodec = MediaCodec.createEncoderByType("video/avc");
+            mediaCodec = MediaCodec.createEncoderByType("video/hevc");
         } catch (IOException e) {
             e.printStackTrace();
         }

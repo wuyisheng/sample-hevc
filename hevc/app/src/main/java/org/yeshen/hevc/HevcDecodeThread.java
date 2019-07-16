@@ -17,19 +17,19 @@ import java.nio.ByteBuffer;
  * Copyright (c) 2019 Yeshen.org, Inc. - All Rights Reserved
  *********************************************************************/
 
-public class AvcDecodeThread extends Thread {
+public class HevcDecodeThread extends Thread {
 
     // refer to https://github.com/cedricfung/MediaCodecDemo
     // how to get h265
     // ffmpeg -i some-video.mp4 -c:a copy -c:v libx265 h265.mp4
     // adb push h265.mp4 /sdcard/DCIM/Camera
 
-    private static final String SAMPLE = Environment.getExternalStorageDirectory() + "/DCIM/Camera/h265.mp4";
-    private static final String TAG = AvcDecodeThread.class.getSimpleName();
+    private static final String SAMPLE = Environment.getExternalStorageDirectory() + "/Download/hevc.mp4";
+    private static final String TAG = HevcDecodeThread.class.getSimpleName();
     private MediaCodec decoder;
     private Surface surface;
 
-    AvcDecodeThread(Surface surface) {
+    HevcDecodeThread(Surface surface) {
         this.surface = surface;
     }
 

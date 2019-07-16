@@ -25,8 +25,8 @@ public class MainActivity extends AppCompatActivity {
     public static final int FRAME_RATE = 30;
     public static final int TIMEOUT_US = 12000;
 
-    private AvcEncodeThread avcEncode;
-    private AvcDecodeThread avcDecode;
+    private HevcEncodeThread avcEncode;
+    private HevcDecodeThread avcDecode;
     private SurfaceView mPreview;
     private SurfaceView mEchoView;
 
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                avcEncode = new AvcEncodeThread();
+                avcEncode = new HevcEncodeThread();
                 avcEncode.start();
             }
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
                 if (avcDecode == null) {
-                    avcDecode = new AvcDecodeThread(holder.getSurface());
+                    avcDecode = new HevcDecodeThread(holder.getSurface());
                     avcDecode.start();
                     mEchoView.bringToFront();
                 }
